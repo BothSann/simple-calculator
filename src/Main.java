@@ -16,6 +16,9 @@ public class Main {
         System.out.print("Please enter the second number: ");
         double secondNumber = getValidNumber(scanner);
 
+        double result = performCalculation(firstNumber, secondNumber, operator);
+
+        System.out.printf("Result: %.2f %c %.2f = %.2f%n", firstNumber, operator, secondNumber, result);
 
     }
 
@@ -41,5 +44,15 @@ public class Main {
                 System.out.print("Invalid operator. Please enter +, -, *, or /: ");
             }
         }
+    }
+
+    public static double performCalculation (double firstNumber, double secondNumber, char operator) {
+        return switch (operator) {
+            case '+' -> firstNumber + secondNumber;
+            case '-' -> firstNumber - secondNumber;
+            case '*' -> firstNumber * secondNumber;
+            case '/' -> firstNumber / secondNumber;
+            default -> throw new IllegalArgumentException("Invalid operator" + operator);
+        };
     }
 }
