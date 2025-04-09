@@ -10,10 +10,10 @@ public class Main {
 
         while (continueCalculating) {
             try{
-                System.out.print("Please enter the first number:");
+                System.out.print("Please enter the first number: ");
                 double firstNumber = getValidNumber(scanner);
 
-                System.out.print("Enter the operator (+,-,*,/): ");
+                System.out.print("Enter the operator (+, -, *, /): ");
                 char operator = getValidOperator(scanner);
 
                 System.out.print("Please enter the second number: ");
@@ -21,10 +21,11 @@ public class Main {
 
                 if (operator == '/' && secondNumber == 0) {
                     System.out.println("Error: Cannot divide by zero.");
-                } else {
-                    double result = performCalculation(firstNumber, secondNumber, operator);
-                    System.out.printf("Result: %.2f %c %.2f = %.2f%n", firstNumber, operator, secondNumber, result);
+                    continue;
                 }
+
+                double result = performCalculation(firstNumber, secondNumber, operator);
+                System.out.printf("Result: %.2f %c %.2f = %.2f%n", firstNumber, operator, secondNumber, result);
 
                 System.out.print("Do you want to perform another calculation? (y/n): ");
                 String response = scanner.next().toLowerCase();
@@ -35,7 +36,8 @@ public class Main {
                 scanner.nextLine();
             }
         }
-        System.out.println("Thank you for using Simple Calculator!");
+
+        System.out.println("Thank you for using Simple Calculator, Goodbye!");
         scanner.close();
     }
 
