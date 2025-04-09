@@ -2,24 +2,41 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
+        boolean continueCalculating = true;
 
-        System.out.println("Welcome to Simple Calculator!\n");
+        System.out.println("Welcome to Simple Calculator!");
+        System.out.println("A simple calculator that performs basic arithmetic operations on two numbers.\n");
 
-        System.out.print("Please enter the first number:");
-        double firstNumber = getValidNumber(scanner);
+        while (continueCalculating) {
+            try{
+                System.out.print("Please enter the first number:");
+                double firstNumber = getValidNumber(scanner);
 
-        System.out.print("Enter the operator (+,-,*,/): ");
-        char operator = getValidOperator(scanner);
+                System.out.print("Enter the operator (+,-,*,/): ");
+                char operator = getValidOperator(scanner);
 
-        System.out.print("Please enter the second number: ");
-        double secondNumber = getValidNumber(scanner);
+                System.out.print("Please enter the second number: ");
+                double secondNumber = getValidNumber(scanner);
 
-        double result = performCalculation(firstNumber, secondNumber, operator);
+                if (operator == '/' && secondNumber == 0) {
+                    System.out.println("Error: Cannot divide by zero.");
+                } else {
+                    double result = performCalculation(firstNumber, secondNumber, operator);
+                    System.out.printf("Result: %.2f %c %.2f = %.2f%n", firstNumber, operator, secondNumber, result);
+                }
 
-        System.out.printf("Result: %.2f %c %.2f = %.2f%n", firstNumber, operator, secondNumber, result);
+                System.out.print("Do you want to perform another calculation? (y/n): ");
+                String response = scanner.next().toLowerCase();
+                continueCalculating = response.equals("y")  || response.equals("yes");
 
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
+                scanner.nextLine();
+            }
+        }
+        System.out.println("Thank you for using Simple Calculator!");
+        scanner.close();
     }
 
     public static double getValidNumber(Scanner scanner) {
